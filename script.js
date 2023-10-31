@@ -1,5 +1,7 @@
 var todo = []
 var last;
+var rolled;
+var idx;
 
 function submit() {
   todo.push(document.getElementById("in").value);
@@ -9,13 +11,20 @@ function submit() {
 
 function roll() {
   if (todo.length > 1) {
-    var rolled;
     do {
-      rolled = todo[Math.floor(Math.random()*todo.length)];
+      idx = Math.floor(Math.random()*todo.length);
+      rolled = todo[idx];
     } while (last == rolled);
     last = rolled;
     displayRoll(rolled);
+  } else {
+    displayRoll(todo[0]);
   }
+}
+
+function delLast() {
+  todo.splice(idx,1);
+  displayTodo();
 }
 
 function displayTodo() {
